@@ -21,3 +21,6 @@ https://github.com/opencv/opencv/tree/master/data/haarcascades
 haarcascade_frontalface_default.xml
 
 create modules
+
+to communicate with nodejs i will need flask api, and the whole app needs to be in flask 
+
