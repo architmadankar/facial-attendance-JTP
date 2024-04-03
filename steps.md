@@ -37,4 +37,4 @@ stuck in installing dlib C++ lib
         development.  You need to install Visual Studio for C++.
 
 Fixed
-took took reference from https://www.geeksforgeeks.org/how-to-install-dlib-library-for-python-in-windows-10/
+took reference from https://www.geeksforgeeks.org/how-to-install-dlib-library-for-python-in-windows-10/
