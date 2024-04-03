@@ -11,3 +11,4 @@ dlib
 decouple
 sqlalchemy
 cmake
+thread
