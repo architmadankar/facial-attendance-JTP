@@ -38,3 +38,5 @@ stuck in installing dlib C++ lib
 
 Fixed
 took reference from https://www.geeksforgeeks.org/how-to-install-dlib-library-for-python-in-windows-10/
+
+settings.py will contain static stuff, file locations general config stuff

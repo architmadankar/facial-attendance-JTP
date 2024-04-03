@@ -9,3 +9,5 @@ pickle
 pillow
 dlib
 decouple
+sqlalchemy
+cmake
