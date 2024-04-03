@@ -12,3 +12,5 @@ MODEL_DLIB = "hog" #hog or cnn
 DLIB_TOLERANCE = 0.6  # 0.6 -> default, 0.72 -> aggressive
 
 HAAR_CASCADE_CLASSIFIER_PATH = os.path.join("classifier", "haarcascade_frontalface_default.xml")
+
+CAMERA_SOURCE = config('OPENCV_VIDEO', default=0, cast=int)
