@@ -41,7 +41,10 @@ took reference from https://www.geeksforgeeks.org/how-to-install-dlib-library-fo
 
 settings.py will contain static stuff, file locations general config stuff
 
-using https://flask-reuploaded.readthedocs.io/en/latest/
+using https://github.com/isLinXu/CVProcessLib/blob/master/utils/ImgFileHelper.py
+
+from https://github.com/isLinXu/CVProcessLib
+
 in /modules/lib/image_helper.py for file uploads in Flask
 
 using https://kizniche.github.io/Mycodo/

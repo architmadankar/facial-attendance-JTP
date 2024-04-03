@@ -2,73 +2,58 @@ import os
 import re
 from typing import Union
 from werkzeug.datastructures import FileStorage
-
 from flask_uploads import UploadSet, IMAGES
+'''
+pip install flask_uploads
+'''
 
-IMAGE_SET = UploadSet("images", IMAGES)  # set name and allowed extensions
+
+# IMAGES : ('jpg jpe jpeg png gif svg bmp')
+
+# (image set name, allowed extensions)
+IMAGE_SET = UploadSet("images", IMAGES)
 
 
 def save_image(image: FileStorage, folder: str = None, name: str = None) -> str:
+    '''
+    save image
+    '''
     return IMAGE_SET.save(image, folder, name)
 
 
 def get_path(filename: str = None, folder: str = None) -> str:
+    '''
+    return image path
+    '''
     return IMAGE_SET.path(filename, folder)
 
 
 def find_image_any_format(filename: str, folder: str) -> Union[str, None]:
-    """
-    Given a format-less filename, try to find the file by appending each of the allowed formats to the given
-    filename and check if the file exists
-    :param filename: formatless filename
-    :param folder: the relative folder in which to search
-    :return: the path of the image if exists, otherwise None
-    """
-    for _format in IMAGES:  # look for existing avatar and delete it
-        avatar = f"{filename}.{_format}"
-        avatar_path = IMAGE_SET.path(filename=avatar, folder=folder)
-        if os.path.isfile(avatar_path):
-            return avatar_path
-    return None
+    for format in IMAGES:
+        image = f'{filename}.{format}'
+        image_path = IMAGE_SET.path(filename=image, folder=folder)
+        if os.path.isfile(image_path):
+            return image_path
 
 
-def _retrieve_filename(file: Union[str, FileStorage]) -> str:
-    """
-    Make our filename related functions generic, able to deal with FileStorage object as well as filename str.
-    """
-    if isinstance(file, FileStorage):
+def retrieve_filename(file: Union[str, FileStorage]) -> str:
+    if isinstance(file, FileStorage):  # check if the input is a FileStorage or just a string
         return file.filename
     return file
 
 
-def is_filename_safe(file: Union[str, FileStorage]) -> bool:
-    """
-    Check if a filename is secure according to our definition
-    - starts with a-z A-Z 0-9 at least one time
-    - only contains a-z A-Z 0-9 and _().-
-    - followed by a dot (.) and a allowed_format at the end
-    """
-    filename = _retrieve_filename(file)
-
-    allowed_format = "|".join(IMAGES)
-    # format IMAGES into regex, eg: ('jpeg','png') --> 'jpeg|png'
+def is_file_safe(file: Union[str, FileStorage]) -> bool:
+    filename = retrieve_filename(file)
+    allowed_format = "|".join(IMAGES)  # jpg|jpe|jpeg|png|gif|svg|bmp
     regex = f"^[a-zA-Z0-9][a-zA-Z0-9_()-\.]*\.({allowed_format})$"
-    return re.match(regex, filename) is not None
+    return re.match(regex, filename) is not None  # return a bool on weather the filename is good
 
 
 def get_basename(file: Union[str, FileStorage]) -> str:
-    """
-    Return file's basename, for example
-    get_basename('some/folder/image.jpg') returns 'image.jpg'
-    """
-    filename = _retrieve_filename(file)
-    return os.path.split(filename)[1]
+    filename = retrieve_filename(file)
+    return os.path.split(filename)[1]  # some/folder/image.png -> image.png
 
 
 def get_extension(file: Union[str, FileStorage]) -> str:
-    """
-    Return file's extension, for example
-    get_extension('image.jpg') returns '.jpg'
-    """
-    filename = _retrieve_filename(file)
-    return os.path.splitext(filename)[1]
+    filename = retrieve_filename(file)
+    return os.path.splitext(filename)[1]  # some/folder/image.png -> .png
