@@ -1,3 +1,10 @@
 opencv-python
 numpy
-face-recognition
+face_recognition
+flask
+flask_restful
+flask_cors
+flask_uploads
+pickle
+pillow
+dlib

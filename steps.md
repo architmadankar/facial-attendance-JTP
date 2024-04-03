@@ -24,3 +24,14 @@ create modules
 
 to communicate with nodejs i will need flask api, and the whole app needs to be in flask 
 
+
+
+the api will contain a dashboard, admin, video_url, users, attendance
+
+
+stuck in installing dlib C++ lib
+  You must use Visual Studio to build a python extension on windows.  If you
+        are getting this error it means you have not installed Visual C++.  Note
+        that there are many flavors of Visual Studio, like Visual Studio for C#
+        development.  You need to install Visual Studio for C++.
+
