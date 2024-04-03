@@ -44,3 +44,5 @@ settings.py will contain static stuff, file locations general config stuff
 using https://flask-reuploaded.readthedocs.io/en/latest/
 in /modules/lib/image_helper.py for file uploads in Flask
 
+using https://kizniche.github.io/Mycodo/
+for camera-initialization, frame-capturing, and client sync
