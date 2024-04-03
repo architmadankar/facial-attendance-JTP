@@ -5,6 +5,7 @@ class AppConfig:
     DEBUG = config('DEBUG', default=True, cast=bool)
     PROPAGATE_EXCEPTIONS = True
 
+#lib/train.py
 FILE_ENCODING = os.path.join("clasifier", "encodings.pickle")
 PATH_DATASET =  os.path.join("static", "images", "dataset")
 MODEL_DLIB = "hog" #hog or cnn
