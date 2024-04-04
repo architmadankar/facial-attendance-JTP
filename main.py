@@ -3,6 +3,7 @@ from modules.lib.train import ClassificationTrain
 from modules.settings import CAMERA_SOURCE
 from modules.lib.utils import AppUtils
 from modules.models import DBase
+
 DBase.metadata.create_all(engine)
 
 def title():

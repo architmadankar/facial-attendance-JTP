@@ -5,10 +5,12 @@ flask
 flask_restful
 flask_cors
 flask_uploads
-pickle
+flask_sqlalchemy
 pillow
 dlib
-decouple
 sqlalchemy
 cmake
 thread
+marshmallow
+marshmallow_sqlalchemy
+python-decouple
