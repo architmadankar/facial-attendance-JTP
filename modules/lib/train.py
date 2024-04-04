@@ -25,7 +25,7 @@ class ClassificationTrain:
         path_id = [os.path.join(PATH_DATASET, f) for f in os.listdir(PATH_DATASET)]
         
         for path_of_id in path_id:
-            _id = int(os.path.split(path_id[1]))
+            _id = int(os.path.split(path_id)[1])
             if _id in unq_id:
                 continue
             path_img = [os.path.join(path_of_id, f) for f in os.listdir(path_of_id)]
