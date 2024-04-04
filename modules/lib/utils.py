@@ -24,3 +24,4 @@ class AppUtils:
         x.release()
         cv2.destroyAllWindows()
         
+        
