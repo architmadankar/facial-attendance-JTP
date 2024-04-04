@@ -5,7 +5,7 @@ from modules.db import Session
 
 from sqlalchemy.sql import func
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import String, Integer, Column, Boolean, DateTime, TIMESTAMP, ForeignKey
+from sqlalchemy import String, Integer, Column, Boolean, DateTime, ForeignKey
 
 DBase=declarative_base()
 
