@@ -1,4 +1,5 @@
 from datetime import date as d, datetime as dt
+
 from modules.db import Session
 
 from sqlalchemy.sql import func
@@ -29,4 +30,19 @@ class Admin(DBase):
     def remove(self) -> None:
         Session.delete(self)
         Session.commit()
-        
+
+class User(DBase):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True)
+    name = Column(String(30), unique=True, nullable=False)
+    # todo relationships
+    
+    @classmethod
+    def get_by_id(cls, _id: int) -> "User":
+        return Session.query(cls). filter_by(id=id).first()
+    
+    @classmethod
+    def get_by_user(cls, name: str) -> "User":
+        return Session.query(cls). filter_by(name=name).first()
+    
+ 
