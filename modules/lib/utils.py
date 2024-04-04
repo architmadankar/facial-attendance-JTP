@@ -6,7 +6,7 @@ import pickle
 from typing import Union
 from datetime import date as d
 
-from 
+from modules.models import User
 
 class AppUtils:
     app_title = "Facial Attendance"
@@ -30,4 +30,5 @@ class AppUtils:
         @classmethod
         def create_n_write(cls, name:str) -> str:
             user = User(name=name)
-        
+            user.create()
+            
