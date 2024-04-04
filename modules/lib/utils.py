@@ -106,3 +106,22 @@ class AppUtils:
                                 print(f"Attendance Marked for {user.name} on {d.today()}")
                         name = user.name
                 names.append(name)
+            for ((top, right, bottom, left), name) in zip(faces, names):
+                if name == "Unknown":
+                    continue
+                top = int(top * r)
+                right = int(right * r)
+                bottom = int(bottom * r)
+                left = int(left * r)
+                top_left = (left, top)
+                bottom_right = (right, bottom)
+                cv2.rectangle(img, top_left, bottom_right, (0, 255, 0), 2)
+                y = top - 15 if top - 15 > 15 else top + 15
+                cv2.putText(img, name, (left, y), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 2)
+            cv2.imshow(f"Attendance - {self.app_title}", img)
+            k = cv2.waitKey(100) & 0xff
+            if k == 27:
+                break
+        pp.release()
+        cv2.destroyAllWindows()
+        print("Attendance Marked Successfully!")
