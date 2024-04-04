@@ -1,9 +1,12 @@
 import cv2
 import face_recognition
+
 import pickle
-import os
+
 from typing import Union
 from datetime import date as d
+
+from 
 
 class AppUtils:
     app_title = "Facial Attendance"
@@ -24,4 +27,7 @@ class AppUtils:
         x.release()
         cv2.destroyAllWindows()
         
+        @classmethod
+        def create_n_write(cls, name:str) -> str:
+            user = User(name=name)
         
