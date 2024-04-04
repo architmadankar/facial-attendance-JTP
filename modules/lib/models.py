@@ -5,7 +5,7 @@ from modules.db import Session
 
 from sqlalchemy.sql import func
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import String, Integer, Column, Boolean
+from sqlalchemy import String, Integer, Column, Boolean, DateTime, TIMESTAMP, ForeignKey
 
 DBase=declarative_base()
 
@@ -83,3 +83,41 @@ class User(DBase):
         Session.delete(self)
         Session.commit()
 
+class MarkAttendance(DBase):
+    __tablename__ = "marked"
+    date = Column(DateTime(timezone=True), default=dt.now, primary_key=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    
+    @classmethod
+    def getall(cls) -> List["MarkAttendance"]:
+        return Session.query(cls).all()
+    
+    def create(self) -> None:
+        Session.add(self)
+        Session.commit()
+    
+    def remove(self) -> None:
+        Session.delete(self)
+        Session.commit()
+        
+    @classmethod
+    def find_by_date(cls, date: d, user: User) -> "MarkAttendance":
+        return Session.query(cls).filter_by(date=date, user=user).first()
+    
+    @classmethod
+    def get_by_time(cls, time:dt) -> "MarkAttendance":
+        return Session.query(cls).filter_by(time=time).first()
+    
+    @classmethod
+    def get_by_user(cls, user: User) -> "MarkAttendance":
+        return Session.query(cls).filter_by(user=user).first()
+    
+    @classmethod
+    def is_marked(cls, date: d, user: User) -> bool:
+        marked = MarkAttendance.find_by_date(date, user)
+        if marked is None:
+            marked = False
+        else:
+            marked= True
+            return marked
+        
