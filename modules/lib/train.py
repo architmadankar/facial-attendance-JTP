@@ -54,7 +54,8 @@ class ClassificationTrain:
                     rec_encodings.append(enc)
                     rec_ids.append(_id)
 
-        print("Encoding_Serialize")
-        data = {"encs": rec_encodings, "ID": rec_ids}
-        with open(FILE_ENCODING, "wb") as f:  # use context manager for file writing
-            f.write(pickle.dumps(data))
+        print("[INFO] serializing encodings...")
+        data = {"encodings": rec_encodings, "ids": rec_ids}
+        f = open(FILE_ENCODING, "wb")
+        f.write(pickle.dumps(data))
+        f.close()
