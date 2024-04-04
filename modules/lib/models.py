@@ -1,4 +1,5 @@
 from datetime import date as d, datetime as dt
+from typing import List
 
 from modules.db import Session
 
@@ -45,4 +46,14 @@ class User(DBase):
     def get_by_user(cls, name: str) -> "User":
         return Session.query(cls). filter_by(name=name).first()
     
- 
+    @classmethod
+    def findall(cls) -> List["User"]:
+        return Session.query(cls).all()
+
+    def create(self) -> None:
+        Session.add(self)
+        Session.commit()
+    
+    def remove(self) -> None:
+        Session.delete(self)
+        Session.commit()
