@@ -1,14 +1,10 @@
 import cv2
 import face_recognition
-
 import pickle
-
 from typing import Union
 from datetime import date as d
-
 from modules.settings import PATH_DATASET, HAAR_CASCADE_CLASSIFIER_PATH, FILE_ENCODING, MODEL_DLIB, DLIB_TOLERANCE
 from modules.models import User, MarkAttendance
-
 import os
 
 class AppUtils:
@@ -66,51 +62,42 @@ class AppUtils:
         cv2.destroyAllWindows()
         
     def rec_n_attendance(self):
-        print("Loading Pickle Encoding File...")
+        print("Checking Encodings [INFO]")
         data = pickle.loads(open(FILE_ENCODING, "rb").read())
-        print("Encoding File Loaded Successfully!")
-        print("Starting Video Stream...")
+        print("Starting Attendance Capturing")
         pp = cv2.VideoCapture(self.vid_input)
-        known_users = {}
+        known_users={}
+        
         while True:
-            pe, img = pp.read()
-            if not pe:
-                print("Camera Not Found!")
-                break
-
+            pe, img =pp.read()
             rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-            r = img.shape[1] / float(rgb.shape[1])
-            
-            faces = face_recognition.face_locations(rgb, model=MODEL_DLIB)
-            encodings = face_recognition.face_encodings(rgb, faces)
+            r = img.shape[1] / float (rgb.shape[1])
+            squares = face_recognition.face_locations(rgb, model=MODEL_DLIB)
+            encodings = face_recognition.face_encodings(rgb, squares)
             names = []
-            
             for encoding in encodings:
-                matches = face_recognition.compare_faces(data["encodings"], encoding, DLIB_TOLERANCE)
-                name = "Unknown"
-                
+                matches = face_recognition.compare_faces(data["encodings"], encoding, tolerance=DLIB_TOLERANCE)
+                namex = "Unknown"
                 if True in matches:
                     matchedIdxs = [i for (i, b) in enumerate(matches) if b]
                     counts = {}
                     for i in matchedIdxs:
-                        _id = data["names"][i]
+                        _id = data["ids"][i]
                         counts[_id] = counts.get(_id, 0) + 1
                     _id = max(counts, key=counts.get)
                     if _id:
                         if _id in known_users.keys():
-                            user =known_users[_id]
+                            name = known_users[_id]
                         else:
                             user = User.get_by_id(_id)
-                            known_users[_id] = user
-                                
+                            known_users[_id] = name
                             if not MarkAttendance.is_marked(d.today(), user):
-                                mark = MarkAttendance(user=user)
-                                mark.create()
-                                print(f"Attendance Marked for {user.name} on {d.today()}")
-                        name = user.name
-                names.append(name)
-            for ((top, right, bottom, left), name) in zip(faces, names):
-                if name == "Unknown":
+                                user_attendance = MarkAttendance(user=user)
+                                user_attendance.create()
+                        namex = user.name
+                names.append(namex)
+            for ((top, right, bottom, left), name) in zip(squares, names):
+                if namex == "Unknown":
                     continue
                 top = int(top * r)
                 right = int(right * r)

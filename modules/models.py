@@ -65,7 +65,8 @@ class User(DBase):
     name = Column(String(30), unique=True, nullable=False)
     # todo relationships
     marked = relationship("MarkAttendance", backref=backref("user"))
-    
+    # marked = relationship("MarkAttendance", backref=backref("user", uselist=False))   
+
     @classmethod
     def get_by_id(cls, _id: int) -> "User":
         return Session.query(cls). filter_by(id=id).first()
@@ -94,14 +95,6 @@ class MarkAttendance(DBase):
     @classmethod
     def getall(cls) -> List["MarkAttendance"]:
         return Session.query(cls).all()
-    
-    def create(self) -> None:
-        Session.add(self)
-        Session.commit()
-    
-    def remove(self) -> None:
-        Session.delete(self)
-        Session.commit()
         
     @classmethod
     def find_by_date(cls, date: d, user: User) -> "MarkAttendance":
@@ -124,3 +117,10 @@ class MarkAttendance(DBase):
             marked= True
             return marked
         
+    def create(self) -> None:
+        Session.add(self)
+        Session.commit()
+    
+    def remove(self) -> None:
+        Session.delete(self)
+        Session.commit()
