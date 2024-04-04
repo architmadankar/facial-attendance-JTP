@@ -74,15 +74,18 @@ class AppUtils:
         known_users = {}
         while True:
             pe, img = pp.read()
-            if not pe:
-                break
+
             rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            r = img.shape[1] / float(rgb.shape[1])
+            
             faces = face_recognition.face_locations(rgb, model=MODEL_DLIB)
             encodings = face_recognition.face_encodings(rgb, faces)
             names = []
-            for encoding, face in zip(encodings, faces):
-                matches = face_recognition.compare_faces(data["encodings"], encoding, tolerance=DLIB_TOLERANCE)
+            
+            for encoding in encodings:
+                matches = face_recognition.compare_faces(data["encodings"], encoding, DLIB_TOLERANCE)
                 name = "Unknown"
+                
                 if True in matches:
                     matchedIdxs = [i for (i, b) in enumerate(matches) if b]
                     counts = {}
@@ -102,15 +105,4 @@ class AppUtils:
                                 mark.create()
                                 print(f"Attendance Marked for {user.name} on {d.today()}")
                         name = user.name
-                names.append(name)           
-                        
-                #         if name not in known_users:
-                #             known_users[name] = d.today()
-                #             print(f"Attendance Marked for {name} on {d.today()}")
-                #     y1, x2, y2, x1 = face
-                #     cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
-                #     cv2.putText(img, name, (x1, y2), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 2)
-                # cv2.imshow("Attendance Recorder - {self.app_title}", img)
-                # k = cv2.waitKey(30) & 0xFF
-                # if k == 27:
-                #     break
+                names.append(name)
