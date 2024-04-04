@@ -7,7 +7,6 @@ from modules.settings import FILE_ENCODING, PATH_DATASET, MODEL_DLIB
 
 #KNN Classifier Training and storing results
 class ClassificationTrain:
-    #using decorator to skip self
     @classmethod
     def training(cls):
         try:

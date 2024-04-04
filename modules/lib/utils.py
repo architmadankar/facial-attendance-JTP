@@ -32,7 +32,7 @@ class AppUtils:
         cv2.destroyAllWindows()
         
     @classmethod
-    def create_n_write(cls, name:str) -> str:
+    def create_n_write(cls, name: str) -> str:
         user = User(name=name)
         user.create()
         path_id= f"{PATH_DATASET}{os.sep}{user.id}"
@@ -56,12 +56,12 @@ class AppUtils:
                 inc +=1
                 cv2.imwrite(f"{path_id}{os.sep}{str(inc)}.jpg", img)
                 cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
-                cv2.imshow("Face Cropper - {self.app_title}", img)
-                k = cv2.waitKey(30) & 0xFF
-                if k == 27:
-                    break
-                elif inc >= 30:
-                    break
+                cv2.imshow(f"Face Cropper - {self.app_title}", img)
+            k = cv2.waitKey(100) & 0xFF
+            if k == 27:
+                break
+            elif inc >= 15: #30
+                break
         pp.release()
         cv2.destroyAllWindows()
         
@@ -74,6 +74,9 @@ class AppUtils:
         known_users = {}
         while True:
             pe, img = pp.read()
+            if not pe:
+                print("Camera Not Found!")
+                break
 
             rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             r = img.shape[1] / float(rgb.shape[1])
@@ -119,7 +122,7 @@ class AppUtils:
                 y = top - 15 if top - 15 > 15 else top + 15
                 cv2.putText(img, name, (left, y), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 2)
             cv2.imshow(f"Attendance - {self.app_title}", img)
-            k = cv2.waitKey(100) & 0xff
+            k = cv2.waitKey(100) & 0xFF
             if k == 27:
                 break
         pp.release()
