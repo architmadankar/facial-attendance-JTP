@@ -10,6 +10,31 @@ from sqlalchemy import String, Integer, Column, Boolean
 DBase=declarative_base()
 
 
+class VideoModel(DBase):
+    __tablename__ = "video"
+    id = Column(String(30), nullable=False, primary_key=True)
+    url = Column(String, nullable=False)
+    is_active = Column(Boolean, default=False)
+    @classmethod
+    def get_by_id(cls, _id: int) -> "VideoModel":
+        return Session.query(cls). filter_by(id=id).first()
+    
+    @classmethod
+    def get_by_url(cls, url: str) -> "VideoModel":
+        return Session.query(cls). filter_by(url=url).first()
+    
+    @classmethod
+    def findall(cls) -> List["VideoModel"]:
+        return Session.query(cls).all() 
+    
+    def create(self) -> None:
+        Session.add(self)
+        Session.commit()
+    
+    def remove(self) -> None:
+        Session.delete(self)
+        Session.commit()
+        
 class Admin(DBase):
     __tablename__ = "admins"
     id = Column(Integer, primary_key=True)
@@ -57,3 +82,4 @@ class User(DBase):
     def remove(self) -> None:
         Session.delete(self)
         Session.commit()
+
