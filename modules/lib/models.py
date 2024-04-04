@@ -6,6 +6,8 @@ from modules.db import Session
 from sqlalchemy.sql import func
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import String, Integer, Column, Boolean, DateTime, ForeignKey
+from sqlalchemy.orm import relationship, backref
+
 
 DBase=declarative_base()
 
@@ -62,6 +64,7 @@ class User(DBase):
     id = Column(Integer, primary_key=True)
     name = Column(String(30), unique=True, nullable=False)
     # todo relationships
+    marked = relationship("MarkAttendance", backref=backref("user"))
     
     @classmethod
     def get_by_id(cls, _id: int) -> "User":
