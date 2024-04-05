@@ -14,3 +14,4 @@ thread
 marshmallow
 marshmallow_sqlalchemy
 python-decouple
+imutils
