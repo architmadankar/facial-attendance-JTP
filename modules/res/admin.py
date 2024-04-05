@@ -32,4 +32,9 @@ class AdminReg(Resource):
 class AdminLogin(Resource):
     @classmethod
     def post(cls):
-        pass
+        admin_json = request.get_json()
+        admin_data = admin_schema.load(admin_json, session=Session)
+        admin = AdminModel.get_username(admin_data.username)
+        if admin (admin.password == admin_data.password):
+            return {"message": "Admin Logged in"}, 200
+        return {"message": "Invalid credentials"}, 401
