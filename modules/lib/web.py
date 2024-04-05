@@ -3,15 +3,15 @@
 from modules.lib.base_camera import BaseCamera
 import cv2
 import pickle
-from modules.settings import DLIB_TOLERANCE, FILE_ENCODING
+from modules.settings import DLIB_TOLERANCE, FILE_ENCODING, MODEL_DLIB
 from modules.models import UserModel, MarkAttendanceModel
 import numpy as np
 import imutils
 import face_recognition
-from modules.settings import MODEL_DLIB
 class App(BaseCamera):
     camera_src = 0
     this_rgb_frame = True
+    
     @classmethod
     def set_camera(cls, src):
         cls.camera_src = src

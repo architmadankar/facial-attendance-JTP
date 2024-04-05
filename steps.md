@@ -55,3 +55,5 @@ Created Fully Functioning CLI app :)
 TODO : Make Backend with FLASK API 
 
 Create Resources for and WEB Utils
+
+WEB Done (i hope)
