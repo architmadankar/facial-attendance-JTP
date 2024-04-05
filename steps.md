@@ -49,3 +49,7 @@ in /modules/lib/image_helper.py for file uploads in Flask
 
 using https://kizniche.github.io/Mycodo/
 for camera-initialization, frame-capturing, and client sync
+
+Created Fully Functioning CLI app :)
+
+TODO : Make Backend with FLASK API 
