@@ -67,3 +67,17 @@ class App(BaseCamera):
                                 user_attendance.create()
                         name_d = user.name            
                 names.append(name_d)
+        cls.this_rgb_frame = not cls.this_rgb_frame
+        for ((top, right, bottom, left), name_d) in zip(squares, names):
+            if name_d == "Unknown":
+                continue
+            top = int(top * r)
+            right = int(right * r)
+            bottom = int(bottom * r)
+            left = int(left * r)
+            top_left = (left, top)
+            bottom_right = (right, bottom)
+            cv2.rectangle(fr, top_left, bottom_right, (0, 255, 0), 2)
+            y = top - 15 if top - 15 > 15 else top + 15
+            cv2.putText(fr, name_d, (left, y), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 255, 0), 2)
+        return cv2.imencode('.jpg', fr)[1].tobytes()
