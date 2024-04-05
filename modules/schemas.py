@@ -6,14 +6,14 @@ from modules.models import AdminModel, UserModel, MarkAttendanceModel, VideoMode
 from werkzeug.datastructures import FileStorage
 
 
-class TeacherSchema(SQLAlchemyAutoSchema):
+class AdminSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = AdminModel
         load_only = ("password",)
         dump_only = ("id",)  
         load_instance = True 
 
-class StudentSchema(SQLAlchemyAutoSchema):
+class UserSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = UserModel
         dump_only = ("id",)
@@ -25,7 +25,7 @@ class AttendanceSchema(SQLAlchemyAutoSchema):
         dump_only = ("date", "user")
         load_instance = True
     user = Nested(
-        StudentSchema
+        UserSchema
     )
 
 class VideoFeedSchema(SQLAlchemyAutoSchema):
