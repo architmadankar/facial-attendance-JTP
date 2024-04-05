@@ -3,7 +3,6 @@ from typing import List
 
 from modules.db import Session
 
-from sqlalchemy.sql import func
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import String, Integer, Column, Boolean, DateTime, ForeignKey
 from sqlalchemy.orm import relationship, backref
@@ -11,116 +10,121 @@ from sqlalchemy.orm import relationship, backref
 
 DBase=declarative_base()
 
-
-class VideoModel(DBase):
-    __tablename__ = "video"
-    id = Column(String(30), nullable=False, primary_key=True)
-    url = Column(String, nullable=False)
-    is_active = Column(Boolean, default=False)
-    @classmethod
-    def get_by_id(cls, _id: int) -> "VideoModel":
-        return Session.query(cls). filter_by(id=id).first()
-    
-    @classmethod
-    def get_by_url(cls, url: str) -> "VideoModel":
-        return Session.query(cls). filter_by(url=url).first()
-    
-    @classmethod
-    def findall(cls) -> List["VideoModel"]:
-        return Session.query(cls).all() 
-    
-    def create(self) -> None:
-        Session.add(self)
-        Session.commit()
-    
-    def remove(self) -> None:
-        Session.delete(self)
-        Session.commit()
-        
-class Admin(DBase):
+class AdminModel(DBase):
     __tablename__ = "admins"
+
     id = Column(Integer, primary_key=True)
-    user= Column(String(30), nullable=False, unique=True)
-    passwd= Column(String(30), nullable=False)
-    
+    username = Column(String(80), nullable=False, unique=True)
+    password = Column(String(80), nullable=False)
+
     @classmethod
-    def get_by_id(cls, _id: int) -> "Admin":
-        return Session.query(cls). filter_by(id=id).first()
-    
+    def get_username(cls, username: str) -> "AdminModel":
+        return Session.query(cls).filter_by(username=username).first()
+
     @classmethod
-    def get_by_user(cls, user: str) -> "Admin":
-        return Session.query(cls). filter_by(user=user).first()
-    
+    def get_id(cls, _id: int) -> "AdminModel":
+        return Session.query(cls).filter_by(id=_id).first()
+
     def create(self) -> None:
         Session.add(self)
         Session.commit()
-    
-    def remove(self) -> None:
+
+    def delete(self) -> None:
         Session.delete(self)
         Session.commit()
 
-class User(DBase):
+class UserModel(DBase):
     __tablename__ = "users"
+
     id = Column(Integer, primary_key=True)
-    name = Column(String(30), unique=True, nullable=False)
-    # todo relationships
-    marked = relationship("MarkAttendance", backref=backref("user"))
-    # marked = relationship("MarkAttendance", backref=backref("user", uselist=False))   
+    name = Column(String(80), unique=True, nullable=False)
+    records = relationship(
+        "MarkAttendanceModel",
+        backref=backref("user")
+    )
 
     @classmethod
-    def get_by_id(cls, _id: int) -> "User":
-        return Session.query(cls). filter_by(id=id).first()
-    
+    def get_name(cls, name: str) -> "UserModel":
+        return Session.query(cls).filter_by(name=name).first()
+
     @classmethod
-    def get_by_user(cls, name: str) -> "User":
-        return Session.query(cls). filter_by(name=name).first()
-    
+    def get_id(cls, _id: int) -> "UserModel":
+        return Session.query(cls).filter_by(id=_id).first()
+
     @classmethod
-    def findall(cls) -> List["User"]:
+    def find_all(cls) -> List["UserModel"]:
         return Session.query(cls).all()
 
     def create(self) -> None:
         Session.add(self)
         Session.commit()
-    
-    def remove(self) -> None:
+
+    def delete(self) -> None:
         Session.delete(self)
         Session.commit()
 
-class MarkAttendance(DBase):
-    __tablename__ = "marked"
+class MarkAttendanceModel(DBase):
+    __tablename__ = "records"
+
     date = Column(DateTime(timezone=True), default=dt.now, primary_key=True)
-    user_id = Column(Integer, ForeignKey("users.id"))
-    
+    student_id = Column(Integer, ForeignKey("users.id"))
+
     @classmethod
-    def getall(cls) -> List["MarkAttendance"]:
-        return Session.query(cls).all()
-        
-    @classmethod
-    def find_by_date(cls, date: d, user: User) -> "MarkAttendance":
+    def get_date(cls, date: d, user: UserModel) -> "MarkAttendanceModel":
         return Session.query(cls).filter_by(date=date, user=user).first()
-    
+
     @classmethod
-    def get_by_time(cls, time:dt) -> "MarkAttendance":
-        return Session.query(cls).filter_by(time=time).first()
-    
-    @classmethod
-    def get_by_user(cls, user: User) -> "MarkAttendance":
+    def get_student(cls, user: UserModel) -> "MarkAttendanceModel":
         return Session.query(cls).filter_by(user=user).first()
-    
+
     @classmethod
-    def is_marked(cls, date: d, user: User) -> bool:
-        marked = MarkAttendance.find_by_date(date, user)
+    def get_time(cls, time: dt) -> "MarkAttendanceModel":
+        return Session.query(cls).filter_by(time=time).first()
+
+    @classmethod
+    def find_all(cls) -> List["MarkAttendanceModel"]:
+        return Session.query(cls).all()
+
+    @classmethod
+    def is_marked(cls, date: d, user: UserModel) -> bool:
+        marked = MarkAttendanceModel.get_date(date, user)
         if marked is None:
             marked = False
         else:
-            marked= True
-            return marked
-        
+            marked = True
+        return marked
+
     def create(self) -> None:
         Session.add(self)
         Session.commit()
-    
-    def remove(self) -> None:
+
+    def delete(self) -> None:
+        Session.delete(self)
+        Session.commit()
+
+class VideoModel(DBase):
+    __tablename__ = "video_dat"
+
+    id = Column(String(30), nullable=False, primary_key=True)
+    is_active = Column(Boolean, default=False)
+    url = Column(String, nullable=False)
+
+    @classmethod
+    def get_id(cls, _id: str) -> "VideoModel":
+        return Session.query(cls).filter_by(id=_id).first()
+
+    @classmethod
+    def get_url(cls, url: str) -> "VideoModel":
+        return Session.query(cls).filter_by(url=url).first()
+
+    @classmethod
+    def find_all(cls) -> List["VideoModel"]:
+        return Session.query(cls).all()
+
+    def create(self) -> None:
+        Session.add(self)
+        Session.commit()
+
+    def delete(self) -> None:
         Session.delete(self)
         Session.commit()

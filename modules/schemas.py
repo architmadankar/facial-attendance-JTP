@@ -1,41 +1,51 @@
-from typing import Any, Mapping, Union
+from typing import Union, Any, Optional, Mapping
 from marshmallow import Schema, fields
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from marshmallow_sqlalchemy.fields import Nested
-from modules.models import VideoModel, Admin, User, MarkAttendance
+from modules.models import AdminModel, UserModel, MarkAttendanceModel, VideoModel
 from werkzeug.datastructures import FileStorage
 
-class AdminSchema(SQLAlchemyAutoSchema):
+
+class TeacherSchema(SQLAlchemyAutoSchema):
     class Meta:
-        model = Admin
-        load_instance = True
-        load_only = ("passwd",)
-        dunp_only = ("id",)
-class UserSchema(SQLAlchemyAutoSchema):
+        model = AdminModel
+        load_only = ("password",)
+        dump_only = ("id",)  
+        load_instance = True 
+
+class StudentSchema(SQLAlchemyAutoSchema):
     class Meta:
-        model = User
-        load_instance = True
+        model = UserModel
         dump_only = ("id",)
-class MarkAttendanceSchema(SQLAlchemyAutoSchema):
-    class Meta:
-        model = MarkAttendance
         load_instance = True
-        dump_only = ("date","user_id")
-    user_id = Nested(UserSchema)
-class VideoModelSchema(SQLAlchemyAutoSchema):
+
+class AttendanceSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = MarkAttendanceModel
+        dump_only = ("date", "user")
+        load_instance = True
+    user = Nested(
+        StudentSchema
+    )
+
+class VideoFeedSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = VideoModel
-        load_instance = True
         dump_only = ("is_active",)
-        
-class FileSchema(fields.Field):
-    error_msg = {"invalid": "Not a valid img file"}
-    def _deserialize(self, value: Any, attr: str | None, data: Mapping[str, Any] | None, **kwargs) -> Union[FileStorage, None]:
+        load_instance = True
+
+class FileStorageField(fields.Field):
+    default_error_messages = {
+        "invalid": "Not a valid image."
+    }
+
+    def _deserialize(self, value: Any, attr: Optional[str], data: Optional[Mapping[str, Any]], **kwargs) -> \
+            Union[FileStorage, None]:
         if value is None:
             return None
         if not isinstance(value, FileStorage):
             self.fail("invalid")
         return value
-        
+
 class ImageSchema(Schema):
-    img = FileSchema(required=True)
+    image = FileStorageField(required=True)
