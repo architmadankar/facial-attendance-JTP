@@ -11,7 +11,7 @@ class ClassificationTrain:
     def training(cls):
         try:
             print("Checking Encodings [INFO]")
-            with open(FILE_ENCODING, "rb") as x: #file path
+            with open(FILE_ENCODING, "rb") as x: 
                 data = pickle.loads(x.read())
                 rec_encodings = data["encodings"]
                 rec_ids = data["ids"]
@@ -32,7 +32,7 @@ class ClassificationTrain:
             return
 
         for path_of_id in path_id:
-            _id = int(os.path.split(path_of_id)[1])  # corrected variable name
+            _id = int(os.path.split(path_of_id)[1])  
             if _id in unq_id:
                 continue
             path_img = [os.path.join(path_of_id, f) for f in os.listdir(path_of_id)]

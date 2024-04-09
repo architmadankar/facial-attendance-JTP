@@ -1,4 +1,5 @@
-from flask_restful import Resource
+from flask_restful import Resource, request
+from modules.db import Session
 from modules.schemas import VideoFeedSchema
 from modules.models import VideoModel
 from modules.lib.web import App
@@ -33,7 +34,9 @@ class VideoActive(Resource):
         if video:
             resp = Response(cls.frame(cam(u_id=video_id)), mimetype='multipart/x-mixed-replace; boundary=frame')
             
-        return resp
+            return resp
+        return {"message": "Video not found"}, 404
+    
     @classmethod
     def frame(cls, cam):
         while True:
@@ -42,4 +45,52 @@ class VideoActive(Resource):
                     b'--frame\r\n'
                     b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n'
             )  
-#TODO video start stop and delete
+
+class VideoAdd(Resource):
+    @classmethod
+    def post(cls):
+        video_json = request.get_json()
+        video = video_schema.load(video_json, session=Session)
+        try:
+            video.create()
+        except:
+            return {"message": "An error occurred inserting the video"}, 500
+        return video_schema.dump(video), 201
+    
+
+class VideoStop(Resource):
+    @classmethod
+    def get(cls, video_id: str):
+        cam = VideoModel.get_id(video_id)
+        if cam:
+            App.stop(video_id)
+            try:
+                cam.is_active = False
+                cam.create()
+            except:
+                return {"message": "An error occurred stopping the video"}, 500
+            return {"message": "Video stopped successfully"}, 200
+        return {"message": "Video not found"}, 404
+    
+class VideoStart(Resource):
+    @classmethod
+    def get(cls, video_id: str):
+        cam = VideoModel.get_id(video_id)
+        if cam:
+            App.start(video_id)
+            try:
+                cam.is_active = True
+                cam.create()
+            except:
+                return {"message": "An error occurred starting the video"}, 500
+            return {"message": "Video started successfully"}, 200
+        return {"message": "Video not found"}, 404
+    
+class VideoDelete(Resource):
+    @classmethod
+    def delete(cls, video_id: str):
+        cam = VideoModel.get_id(video_id)
+        if cam:
+            cam.delete()
+            return {"message": "Video deleted successfully"}, 200
+        return {"message": "Video not found"}, 404
