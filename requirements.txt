@@ -5,7 +5,7 @@ face_recognition
 flask
 flask_restful
 flask_cors
-flask_uploads
+Flask-Uploads
 flask_sqlalchemy
 pillow
 dlib
@@ -16,3 +16,4 @@ marshmallow
 marshmallow_sqlalchemy
 python-decouple
 imutils
+python-dotenv

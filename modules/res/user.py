@@ -15,7 +15,10 @@ user_schema = UserSchema()
 image_schema = ImageSchema()
 class UserList(Resource):
     @classmethod
-    def get(cls):
+    def get(cls, user_id: int):
+        user = UserModel.get_id(user_id)
+        if not user:
+            return {"message": "User not found"}, 404
         return user_schema.dump(UserModel.find_all()), 200
 
 class AddUser(Resource):

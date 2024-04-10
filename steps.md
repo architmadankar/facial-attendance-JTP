@@ -1,7 +1,8 @@
 Objectives
 
-create backend 
-create frontend 
+create backend  -- done
+Create Backend API -- 80%
+create frontend  -- 20%
 Containerize application (docker)
 
 optional 
@@ -24,9 +25,7 @@ create modules
 
 to communicate with nodejs i will need flask api, and the whole app needs to be in flask 
 
-
-
-the api will contain a dashboard, admin, video_url, users, attendance
+the api will contain a dashboard, admin, video_url=user device camera, users, attendance
 
 
 stuck in installing dlib C++ lib

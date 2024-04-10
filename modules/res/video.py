@@ -15,7 +15,7 @@ class VideoList(Resource):
 class Video(Resource):
     @classmethod
     def get(cls, video_id: int):
-        video = VideoModel.find_by_id(video_id)
+        video = VideoModel.get_id(video_id)
         if video:
             return video_schema.dump(video), 200
         return {"message": "Video not found"}, 404
