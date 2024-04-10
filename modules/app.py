@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+from flask_jwt_extended import JWTManager
 
 from flask_uploads import configure_uploads
 from flask_restful import Api
@@ -16,6 +17,7 @@ app.config.from_object("modules.settings.AppConfig")
 api =Api(app)
 configure_uploads(app, IMAGE_SET)
 cors = CORS(app)
+jwt = JWTManager(app)
 
 @app.errorhandler(ValidationError)
 def handle_validation(err):
