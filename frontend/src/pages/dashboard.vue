@@ -11,19 +11,25 @@
       <button type="button" class="close" @click="errorMsg = ''">
         <span aria-hidden="true">&times;</span>
       </button>
+      <div>
+    <h1>Welcome, {{ user.username }}</h1>
+    <!-- Add more user information here -->
+  </div>
     </div>
   </div>
 </template>
 
 <script>
 import dashboardService from '@/services/dashboard.service';
+import authService from '@/services/auth.service';
 
 export default {
   name: 'UserDashboard',
   data() {
     return {
       responseMsg: '',
-      errorMsg: ''
+      errorMsg: '',
+      user: authService.getUser()
     };
   },
   created() {

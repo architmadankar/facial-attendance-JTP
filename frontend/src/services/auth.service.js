@@ -9,20 +9,35 @@ export default {
   },
 
   loginUser(user) {
-    return axios.post(LOGIN_URL, user);
+    return new Promise((resolve, reject) => {
+      axios.post(LOGIN_URL, user)
+        .then(response => {
+          if (response.data.success) {
+            // Store the user's information in localStorage
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+            resolve(response.data.user);
+          } else {
+            reject(new Error(response.data.message));
+          }
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
   },
 
   loggedIn() {
-    return !!localStorage.getItem('access_token');
+    // Check if the user's information is in localStorage
+    return localStorage.getItem('user') !== null;
   },
 
   logoutUser() {
-    localStorage.removeItem('access_token');
-    // Assuming you're using Vue Router
-    this.$router.push('/login');
+    // Remove the user's information from localStorage
+    localStorage.removeItem('user');
   },
 
-  getToken() {
-    return localStorage.getItem('access_token');
+  getUser() {
+    // Retrieve the user's information from localStorage
+    return JSON.parse(localStorage.getItem('user'));
   }
 };
