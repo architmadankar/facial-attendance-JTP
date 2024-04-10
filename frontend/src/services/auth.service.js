@@ -9,35 +9,19 @@ export default {
   },
 
   loginUser(user) {
-    return new Promise((resolve, reject) => {
-      axios.post(LOGIN_URL, user)
-        .then(response => {
-          if (response.data.success) {
-            // Store the user's information in localStorage
-            localStorage.setItem('user', JSON.stringify(response.data.user));
-            resolve(response.data.user);
-          } else {
-            reject(new Error(response.data.message));
-          }
-        })
-        .catch(error => {
-          reject(error);
-        });
-    });
+    return axios.post(LOGIN_URL, user);
   },
 
   loggedIn() {
-    // Check if the user's information is in localStorage
-    return localStorage.getItem('user') !== null;
+    return !!localStorage.getItem('access_token');
   },
 
   logoutUser() {
-    // Remove the user's information from localStorage
-    localStorage.removeItem('user');
+    localStorage.removeItem('access_token');
+    this.$router.push('/login');
   },
 
-  getUser() {
-    // Retrieve the user's information from localStorage
-    return JSON.parse(localStorage.getItem('user'));
+  getToken() {
+    return localStorage.getItem('access_token');
   }
 };

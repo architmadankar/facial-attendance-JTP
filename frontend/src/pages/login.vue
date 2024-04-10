@@ -68,7 +68,7 @@ export default {
           password: this.password
         });
         this.errorMsg = '';
-        localStorage.setItem('user', res.user);
+        localStorage.setItem('access_token', res.access_token);
         this.$router.push('/dashboard');
       } catch (error) {
         console.error('Error logging in:', error);

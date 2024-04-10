@@ -12,6 +12,7 @@ from modules.res.dashboard import Dashboard
 from modules.res.mark import Mark
 from modules.res.video import Video, VideoActive, VideoAdd, VideoList, VideoStop, VideoDelete, VideoStart
 from modules.res.user import UserList, AddUser, UserCap, DeleteUser
+
 app = Flask(__name__)
 app.config.from_object("modules.settings.AppConfig")
 api =Api(app)

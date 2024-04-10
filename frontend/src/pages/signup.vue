@@ -1,3 +1,5 @@
+<!-- register.vue -->
+
 <template>
   <div class="py-5">
     <div class="row">
@@ -45,7 +47,7 @@
 import authService from '@/services/auth.service';
 
 export default {
-  name: 'UserSignup',
+  name: 'AdminSignup',
   data() {
     return {
       username: '',

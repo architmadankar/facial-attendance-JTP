@@ -5,6 +5,8 @@ class AppConfig:
     DEBUG = config('DEBUG', default=True, cast=bool)
     PROPAGATE_EXCEPTIONS = True
     UPLOADED_IMAGES_DEST = os.path.join("static", "images")
+    SECRET_KEY = config('SECRET_KEY')
+    JWT_SECRET_KEY = config('JWT_SECRET_KEY')
 
 
 #lib/train.py
