@@ -17,7 +17,7 @@ user_schema = UserSchema()
 image_schema = ImageSchema()
 class UserList(Resource):
     @classmethod
-    @jwt_required
+
     def get(cls, user_id: int):
         user = UserModel.get_id(user_id)
         if not user:
