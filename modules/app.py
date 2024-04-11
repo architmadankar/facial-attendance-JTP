@@ -33,7 +33,7 @@ api.add_resource(VideoStart, "/video/start/<string:video_id>")
 api.add_resource(VideoDelete, "/video/delete/<string:video_id>")
 
 api.add_resource(Admin, "/admin/<int:admin_id>") #
-api.add_resource(AdminReg, "/admin/signup") #
+api.add_resource(AdminReg, "/admin/register") #
 api.add_resource(AdminLogin, "/admin/login") #
 
 api.add_resource(UserList, "/user/<int:user_id>")

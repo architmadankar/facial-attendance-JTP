@@ -8,8 +8,8 @@ import { User } from '../class/user';
 })
 export class AuthService {
 
-  private _registerUrl = "http://localhost:5000/register";
-  private _loginUrl = "http://localhost:5000/login";
+  private _registerUrl = "http://localhost:5000//admin/register";
+  private _loginUrl = "http://localhost:5000//admin/login";
 
   constructor(private http: HttpClient, private _router: Router) { }
 
