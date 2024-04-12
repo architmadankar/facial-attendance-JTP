@@ -34,11 +34,11 @@ export class RegisterComponent implements OnInit{
   registerUser(){
     this.submit = true;
     this._auth.registerUser(this.regFrom.value).subscribe({
-      next: (res) => {
+      next: res => {
         this.respMsg = res.message;
         this.err = '';
       },
-      error: (err) => {
+      error: err => {
         this.err = err.error.message;
         this.respMsg = '';
       }

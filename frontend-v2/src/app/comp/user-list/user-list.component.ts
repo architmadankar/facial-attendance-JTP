@@ -11,9 +11,9 @@ import { UserService } from '../../services/user.service';
 })
 export class UserListComponent implements OnInit{
 
-  userForm: FormGroup;
+  userForm: FormGroup =  new FormGroup({});
   public formIsCollapsed = true;
-  public users: Iuser[] = [];
+  public user: Iuser[] = [];
 
   addRespMsg: string = '';
   deleteRespMsg: string = '';
@@ -27,7 +27,31 @@ export class UserListComponent implements OnInit{
       name: ['', Validators.required]
     });
 
-    this._userService.getUsers().subscribe(data => this.users = data);
+    this._userService.getUserList().subscribe({
+      next: data => { 
+        this.user = data;  
+      } 
+    });
+  }
+  get name(){
+    return this.userForm.get('name');
+  }
 
-  });
+  addUser(){
+    console.log(this.userForm.value);
+    this._userService.addUser(this.userForm.value).subscribe(data => {
+      this.captureFaces(data.id);
+    });
+  }
+
+  captureFaces(user_id: number){
+    this._router.navigate(['capture/'+ user_id], {relativeTo: this.route});
+  }
+  deleteUser(user_id: number, index: number){
+    this._userService.deleteUser(user_id).subscribe(data => {
+      this.deleteRespMsg = '';
+      this.deleteRespMsg = data.msg;
+      this.user.splice(index, 1);
+    });
+  }
 }
