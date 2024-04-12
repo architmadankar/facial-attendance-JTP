@@ -15,7 +15,7 @@ export class DashboardService {
   }
   getDashboard() {
     let _authService = this._injector.get(AuthService);
-    if (_authService.getToken()) {
+    if (_authService.loggedIn()) {
       return this.http.get<any>(this._dashboardUrl);
     }
     return this._httpWH.get<any>(this._dashboardUrl);

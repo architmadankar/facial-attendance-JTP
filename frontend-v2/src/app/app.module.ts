@@ -10,14 +10,15 @@ import { NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptorService } from './services/token-interceptor.service';
-import { DashboardComponent } from './comp/dashboard/dashboard.component';
+import { UserListComponent } from './comp/user-list/user-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
-    DashboardComponent],
+    UserListComponent,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
