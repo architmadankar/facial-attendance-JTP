@@ -11,7 +11,7 @@ export class AttendanceService {
 
   constructor(private http: HttpClient) { }
 
-  getAttendance(): Observable<IAttendance[]>{
-    return this.http.get<IAttendance[]>(this._attendanceUrl);
-  }
+getAttendance(): Observable<IAttendance[]> {
+  return this.http.get<IAttendance[]>('http://localhost:5000/attendance');
+}
 }

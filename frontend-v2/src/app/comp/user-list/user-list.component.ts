@@ -13,7 +13,7 @@ export class UserListComponent implements OnInit{
 
   userForm: FormGroup =  new FormGroup({});
   public formIsCollapsed = true;
-  public user: Iuser[] = [];
+  public users: Iuser[] = [];
 
   addRespMsg: string = '';
   deleteRespMsg: string = '';
@@ -29,7 +29,7 @@ export class UserListComponent implements OnInit{
 
     this._userService.getUserList().subscribe({
       next: data => { 
-        this.user = data;  
+        this.users = data;  
       } 
     });
   }
@@ -51,7 +51,7 @@ export class UserListComponent implements OnInit{
     this._userService.deleteUser(user_id).subscribe(data => {
       this.deleteRespMsg = '';
       this.deleteRespMsg = data.msg;
-      this.user.splice(index, 1);
+      this.users.splice(index, 1);
     });
   }
 }

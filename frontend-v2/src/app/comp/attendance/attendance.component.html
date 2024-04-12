@@ -1,1 +1,16 @@
-<p>Attendance Works!</p>
+<table class="table table-striped mt-4">
+  <thead>
+    <tr>
+        <th scope="col">Date</th>
+        <th scope="col">User</th>
+        <th scope="col">Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let attendance of attendances">
+        <th scope="row">{{ attendance.date | date:'shortDate'}}</th>
+        <td for names> {{ attendance.user.name }} </td>
+        <td> {{ attendance.date | date:'mediumTime' }} </td>
+    </tr>
+  </tbody>
+</table>

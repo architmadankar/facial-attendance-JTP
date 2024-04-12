@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'attendance', component: AttendanceComponent, canActivate: [authGuard], title: 'Attendance' },
+  { path: 'attendance', component: AttendanceComponent, canActivate: [authGuard] },
   { path: 'users', component: UserListComponent, canActivate: [authGuard], title: 'Dashboard' }
 ];
 
