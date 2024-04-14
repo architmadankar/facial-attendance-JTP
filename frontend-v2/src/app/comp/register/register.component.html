@@ -2,19 +2,14 @@
   <div class="row">
     <div class="col-md-6 mx-auto">
       <span class="anchor" id="formLogin"></span>
-
-      <!-- form card login -->
       <div class="card rounded-0">
         <div class="card-header">
           <h3 class="mb-0">Register</h3>
         </div>
         <div class="card-body">
-          <!--response & error alerts-->
           <ngb-alert *ngIf="respMsg" [type]="'success'" (close)="respMsg=''">{{ respMsg }}</ngb-alert>
           <ngb-alert *ngIf="err" [type]="'danger'" (close)="err=''">{{ err }}</ngb-alert>
-          <!--/response & error alerts-->
           <form class="form" [formGroup]="regFrom" (ngSubmit)="registerUser()" novalidate>
-            <!--username-->
             <div class="form-group">
               <label for="">Username</label>
               <input type="text" formControlName="username"
@@ -25,8 +20,6 @@
                 <small *ngIf="username?.errors" class="text-danger">Username must be at least 4 characters</small>
               </div>
             </div>
-            <!--/username-->
-            <!--password-->
             <div class="form-group">
               <label>Password</label>
               <input type="password" formControlName="password" 
@@ -37,13 +30,10 @@
                 <small *ngIf="password?.errors" class="text-danger">Password must be minimum 8 characters, at least one letter & one number</small>
               </div>
             </div>
-            <!--/password-->
             <button [disabled]="!regFrom.valid" type="submit" class="btn btn-primary float-right">Register</button>
           </form>
         </div>
-        <!--/card-block-->
       </div>
-      <!-- /form card login -->
     </div>
   </div>
 </div>

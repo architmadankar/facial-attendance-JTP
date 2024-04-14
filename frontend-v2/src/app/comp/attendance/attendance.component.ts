@@ -1,6 +1,6 @@
+import { AttendanceService } from '../../services/attendance.service';
 import { Component, OnInit } from '@angular/core';
 import { IAttendance } from '../../interface/iattendance';
-import { AttendanceService } from '../../services/attendance.service';
 
 @Component({
   selector: 'app-attendance',

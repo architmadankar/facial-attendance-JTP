@@ -1,17 +1,17 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Iuser } from '../interface/iuser';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  _trainUrl = 'http://localhost:5000/user/train';
-  _userListURl = 'http://localhost:5000/user';
-  _addUserURL = 'http://localhost:5000/user/add';
-  _deleteUserURL = 'http://localhost:5000/user/delete';
-  _captureUserURL = 'http://localhost:5000/user/cap';
+  _trainUrl = 'http://localhost:5000/users/train';
+  _userListURl = 'http://localhost:5000/users';
+  _addUserURL = 'http://localhost:5000/users/add';
+  _deleteUserURL = 'http://localhost:5000/users/delete';
+  _captureUserURL = 'http://localhost:5000/users/cap';
 
   constructor(private http: HttpClient) { }
 
@@ -22,12 +22,12 @@ export class UserService {
     return this.http.post<any>(this._addUserURL, user);
   }
 
-  deleteUser(user_id: number){
+  deleteUser(user_id: any){
     return this.http.delete<any>(this._deleteUserURL + "/" + user_id);
   }
 
-  captureUser(user_id: number, image: any){
-    return this.http.post<any>(this._captureUserURL+ "/" +user_id, image);
+  captureUser(user_id: any, image: any){
+    return this.http.post<any>(this._captureUserURL + "/" + user_id, image);
   }
   trainClassifier(){
     return this.http.get<any>(this._trainUrl);

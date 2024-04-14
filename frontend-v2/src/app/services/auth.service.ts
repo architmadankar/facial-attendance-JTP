@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { User } from '../class/user';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,21 +15,14 @@ export class AuthService {
 
   registerUser(user: User){
     return this.http.post<any>(this._registerUrl, user)
-    // .pipe(
-    //   catchError(this.errorHandler)
-    // );
   }
 
   loginUser(user: User){
     return this.http.post<any>(this._loginUrl, user);
   }
 
-  // errorHandler(error: HttpErrorResponse){
-  //   return throwError(error);    
-  // }
 
   loggedIn(){
-    // returns true if access_token exists else false
     return !!localStorage.getItem('access_token');
   }
 
@@ -38,7 +32,6 @@ export class AuthService {
   }
 
   getToken(){
-    // returns the token
     return localStorage.getItem('access_token');
   }
 }

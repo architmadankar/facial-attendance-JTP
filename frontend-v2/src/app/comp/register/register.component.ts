@@ -19,15 +19,12 @@ export class RegisterComponent implements OnInit{
 
   ngOnInit(): void {
     this.regFrom = this.fb.group({
-      username: ['' ],
-      password: ['']
+      username: ['', [Validators.required, Validators.minLength(4)]],
+      password: ['', [Validators.required, Validators.pattern(this.paswdRegex)]]
     });
+  
   }
 
-  // regFrom = this.fb.group({
-  //   username: ['',Validators.required, Validators.minLength(3) ],
-  //   password: ['',Validators.pattern(this.paswdRegex), Validators.required, Validators.minLength(6)]
-  // });
   get username(){ return this.regFrom.get('username'); }
   get password(){ return this.regFrom.get('password'); }
 

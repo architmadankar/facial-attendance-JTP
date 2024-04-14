@@ -6,7 +6,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" *ngIf="loggedIn()">
-        <a class="nav-link" routerLink="/video_feeds" routerLinkActive="active">Video Feeds</a>
+        <a class="nav-link" routerLink="/video" routerLinkActive="active">Video Feeds</a>
       </li>
       <li class="nav-item" *ngIf="loggedIn()">
         <a class="nav-link" routerLink="/users" routerLinkActive="active">Users</a>
@@ -14,15 +14,6 @@
       <li class="nav-item" *ngIf="loggedIn()">
         <a class="nav-link" routerLink="/attendance" routerLinkActive="active">Check Attendance</a>
       </li>
-      <!-- <li class="nav-item dropdown" *ngIf="loggedIn()">
-        <a class="nav-link dropdown-toggle" routerLink="/attendance" id="attendanceDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Check Attendance
-        </a>
-        <div class="dropdown-menu" aria-labelledby="attendanceDropDown">
-          <a class="dropdown-item" routerLink="/attendance/date">By Date</a>
-          <a class="dropdown-item" routerLink="/attendance/student">By Student</a>
-        </div>
-      </li> -->
     </ul>
     <ul class="navbar-nav">
         <a class="nav-link" *ngIf="!loggedIn()" routerLink="/login" routerLinkActive="active">Login</a>

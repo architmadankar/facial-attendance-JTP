@@ -3,21 +3,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { routingComponents } from './app-routing.module';
 
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbAlert, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptorService } from './services/token-interceptor.service';
-import { UserListComponent } from './comp/user-list/user-list.component';
-
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
-    UserListComponent,
     ],
   imports: [
     BrowserModule,
@@ -26,7 +24,9 @@ import { UserListComponent } from './comp/user-list/user-list.component';
     CommonModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgbAlertModule
+    FontAwesomeModule,
+    NgbAlertModule,
+    NgbAlert
   ],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}],
   bootstrap: [AppComponent]
