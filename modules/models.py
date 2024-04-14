@@ -38,7 +38,7 @@ class UserModel(DBase):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(80), unique=True, nullable=False)
-    records = relationship(
+    attendances = relationship(
         "MarkAttendanceModel",
         backref=backref("user")
     )
@@ -64,7 +64,7 @@ class UserModel(DBase):
         Session.commit()
 
 class MarkAttendanceModel(DBase):
-    __tablename__ = "records"
+    __tablename__ = "attendances"
 
     date = Column(DateTime(timezone=True), default=dt.now, primary_key=True)
     student_id = Column(Integer, ForeignKey("users.id"))

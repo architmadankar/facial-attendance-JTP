@@ -5,20 +5,18 @@ from modules.models import VideoModel
 from modules.lib.web import App
 from flask import Response
 
-from flask_jwt_extended import jwt_required
-
 
 video_list = VideoFeedSchema(many=True)
 video_schema = VideoFeedSchema()
 class VideoList(Resource):
     @classmethod
-    @jwt_required
+    
     def get(cls):
         return video_list.dump(VideoModel.find_all()), 200
     
 class Video(Resource):
     @classmethod
-    @jwt_required
+    
     def get(cls, video_id: int):
         video = VideoModel.get_id(video_id)
         if video:
@@ -27,7 +25,7 @@ class Video(Resource):
 
 class VideoActive(Resource):
     @classmethod
-    @jwt_required
+    
     def get(cls, video_id: str):
         video = VideoModel.get_id(video_id)
         video_url = video.url
@@ -54,7 +52,7 @@ class VideoActive(Resource):
 
 class VideoAdd(Resource):
     @classmethod
-    @jwt_required
+    
     def post(cls):
         video_json = request.get_json()
         video = video_schema.load(video_json, session=Session)
@@ -67,7 +65,7 @@ class VideoAdd(Resource):
 
 class VideoStop(Resource):
     @classmethod
-    @jwt_required
+    
     def get(cls, video_id: str):
         cam = VideoModel.get_id(video_id)
         if cam:
@@ -82,7 +80,7 @@ class VideoStop(Resource):
     
 class VideoStart(Resource):
     @classmethod
-    @jwt_required
+    
     def get(cls, video_id: str):
         cam = VideoModel.get_id(video_id)
         if cam:
@@ -97,7 +95,7 @@ class VideoStart(Resource):
     
 class VideoDelete(Resource):
     @classmethod
-    @jwt_required
+    
     def delete(cls, video_id: str):
         cam = VideoModel.get_id(video_id)
         if cam:

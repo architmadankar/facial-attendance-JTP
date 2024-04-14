@@ -10,23 +10,17 @@ import shutil
 from flask_uploads import UploadNotAllowed
 from modules.lib.train import ClassificationTrain
 from modules.settings import FILE_ENCODING, PATH_DATASET
-
-from flask_jwt_extended import jwt_required
-
+user_list_schema = UserSchema(many=True)
 user_schema = UserSchema()
 image_schema = ImageSchema()
+
 class UserList(Resource):
     @classmethod
-
-    def get(cls, user_id: int):
-        user = UserModel.get_id(user_id)
-        if not user:
-            return {"message": "User not found"}, 404
-        return user_schema.dump(UserModel.find_all()), 200
+    def get(cls):
+        return user_list_schema.dump(UserModel.find_all()), 200
 
 class AddUser(Resource):
     @classmethod
-    @jwt_required
     def post(cls):
         user_json = request.get_json()
         user = user_schema.load(user_json, session=Session)
@@ -41,7 +35,6 @@ class AddUser(Resource):
     
 class DeleteUser(Resource):
     @classmethod
-    @jwt_required
     def delete(cls, user_id: int):
         user = UserModel.get_id(user_id)
         if user:
@@ -72,11 +65,10 @@ class DeleteUser(Resource):
     
 class UserCap(Resource):
     @classmethod
-    @jwt_required
-    def psot(cls, user_id: int):
+    def post(cls, user_id: int):
         data = image_schema.load(request.files)
         folder = os.path.join(PATH_DATASET, str(user_id)) #"dataset"
-        filename = str(len(os.lisdir(os.path.join(PATH_DATASET, str(user_id))))+1)
+        filename = str(len(os.listdir(os.path.join(PATH_DATASET, str(user_id))))+1)
         
         try:
             ext = image_helper.get_extension(data["image"].filename)

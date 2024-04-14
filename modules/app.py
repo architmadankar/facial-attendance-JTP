@@ -36,10 +36,10 @@ api.add_resource(Admin, "/admin/<int:admin_id>") #
 api.add_resource(AdminReg, "/admin/register") #
 api.add_resource(AdminLogin, "/admin/login") #
 
-api.add_resource(UserList, "/user/<int:user_id>")
-api.add_resource(AddUser, "/user/add")
-api.add_resource(UserCap, "/user/cap/<int:user_id>")
-api.add_resource(DeleteUser, "/user/delete/<int:user_id>")
+api.add_resource(UserList, "/users")
+api.add_resource(AddUser, "/users/add")
+api.add_resource(UserCap, "/users/capture/<int:user_id>")
+api.add_resource(DeleteUser, "/users/delete/<int:user_id>")
 
 api.add_resource(Dashboard, "/dashboard") #
 api.add_resource(Mark, "/attendance") #

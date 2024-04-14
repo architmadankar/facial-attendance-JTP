@@ -1,5 +1,3 @@
-#similar to utils.py
-
 from modules.lib.base_camera import BaseCamera
 import cv2
 import pickle
