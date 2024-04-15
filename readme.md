@@ -93,10 +93,9 @@ Facial Attendance can have many advantages such as:
 
 ## Screenshots
 
-![Add User]([http://full/path/to/img.jpg](https://github.com/architmadankar/facial-attendance-JTP/blob/90e7a2ce5c84b12eb849293942e85112ebb2e740/screenshots/addUser.png
-) "Optional title")
+![Add User]([http://full/path/to/img.jpg](https://github.com/architmadankar/facial-attendance-JTP/blob/90e7a2ce5c84b12eb849293942e85112ebb2e740/screenshots/addUser.png) "Optional title")
 
-![Login]([http://full/path/to/img.jpg](https://github.com/architmadankar/facial-attendance-JTP/blob/90e7a2ce5c84b12eb849293942e85112ebb2e740/screenshots/login.png) "Optional title")
+![Login](http://full/path/to/img.jpg](https://github.com/architmadankar/facial-attendance-JTP/blob/90e7a2ce5c84b12eb849293942e85112ebb2e740/screenshots/login.png) "Optional title")
 
 ![Register](https://github.com/architmadankar/facial-attendance-JTP/blob/90e7a2ce5c84b12eb849293942e85112ebb2e740/screenshots/register.png "Optional title")
 
