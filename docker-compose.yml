@@ -1,16 +1,19 @@
-version: "3.9"
+version: '4'
 services:
   frontend:
-    build:
+    build: 
       context: frontend
+    image: frontend-image
     ports:
-      - 4200:4200
+      - "4200:4200"
     volumes:
       - ./frontend:/project
       - /project/node_modules
+
   backend:
     build:
       context: backend
+    image: backend-image
     ports:
       - 5000:5000
     volumes:
