@@ -100,4 +100,19 @@ Facial Attendance can have many advantages such as:
 ![Register](https://github.com/architmadankar/facial-attendance-JTP/blob/90e7a2ce5c84b12eb849293942e85112ebb2e740/screenshots/register.png "Optional title")
 
 
+## References 
+facial recognition pre-trained classifier from official opencv github repo
 
+> https://github.com/opencv/opencv/tree/master/data/haarcascades
+
+Image File Helper from isLinXu
+
+> using https://github.com/isLinXu/CVProcessLib/blob/master/utils/ImgFileHelper.py
+
+> from https://github.com/isLinXu/CVProcessLib
+
+> in /modules/lib/image_helper.py for file uploads in Flask
+
+for camera-initialization, frame-capturing, and client sync using 
+
+> https://kizniche.github.io/Mycodo/
