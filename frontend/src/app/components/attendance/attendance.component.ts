@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IAttendance } from '../../inter/attendance';
+import { IAttendance } from '../../interfaces/attendance';
 import { AttendanceService } from '../../services/attendance.service';
 
 
@@ -15,11 +15,14 @@ export class AttendanceComponent implements OnInit {
   constructor(private _attendanceService: AttendanceService) { }
 
   ngOnInit(): void {
-    this._attendanceService.getAttendanceList()
-      .subscribe({
-      next:  (res) => this.attendances = res,
-      error:  (err: any) => console.error('There was an error: ', err)
-  });
+    this._attendanceService.getAttendanceList().subscribe(
+      res => {
+        console.log(res);
+        this.attendances = res;
+      },
+      err => {
+        // console.log(err);
+      }
+    );
   }
-
 }

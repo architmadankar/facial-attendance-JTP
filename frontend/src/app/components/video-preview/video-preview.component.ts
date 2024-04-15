@@ -17,8 +17,8 @@ export class VideoPreviewComponent implements OnInit {
 
   ngOnInit(): void {
     let id = this.route.snapshot.paramMap.get('feed_id');
-    this.feed_id = id ?? '';
-    this._videoFeedService.getVideoFeed(id ?? '').subscribe(
+    this.feed_id = id!;
+    this._videoFeedService.getVideoFeed(id!).subscribe(
       res => {
         console.log(res);
         this.is_active = res.is_active;
@@ -26,8 +26,7 @@ export class VideoPreviewComponent implements OnInit {
         this._feedUrl = this._videoFeedService._feedPreviewUrl + "/" + id;
 
       },
-      err => {
-      }
+
     );
   }
 

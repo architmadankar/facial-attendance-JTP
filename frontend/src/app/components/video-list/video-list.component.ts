@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { faVideo, faCircle, faPlay, faStop, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { VideoService } from '../../services/video.service';
 
-import { IVideoFeed } from '../../inter/video-feed';
+import { IVideoFeed } from '../../interfaces/video-feed';
 
 @Component({
   selector: 'app-video-list',

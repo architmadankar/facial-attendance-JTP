@@ -9,7 +9,7 @@
   <tbody>
     <tr *ngFor="let attendance of attendances">
         <th scope="row">{{ attendance.date | date:'shortDate'}}</th>
-        <td> {{ attendance.users.name }} </td>
+        <td for names> {{ attendance.user.name }} </td>
         <td> {{ attendance.date | date:'mediumTime' }} </td>
     </tr>
   </tbody>

@@ -3,6 +3,6 @@ import { IUser } from './user';
 
 export interface IAttendance {
     date: Date,
-    users: IUser,
+    user: IUser,
     time: Time
 }

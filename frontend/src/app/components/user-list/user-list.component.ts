@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { UserService } from '../../services/user.service';
-import { IUser } from '../../inter/user';
+import { IUser } from '../../interfaces/user';
 
 @Component({
   selector: 'app-user-list',
@@ -54,7 +54,7 @@ export class UserListComponent implements OnInit {
   }
 
   captureFaces(user_id:any){
-    this._router.navigate(['capture/' + user_id], {relativeTo: this.route});
+    this._router.navigate(['cap/' + user_id], {relativeTo: this.route});
   }
 
   deleteUser(user_id:any, index:any){
