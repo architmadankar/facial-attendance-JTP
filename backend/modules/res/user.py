@@ -8,7 +8,7 @@ from flask_uploads import UploadNotAllowed
 
 from modules.db import Session
 from modules.lib import image_helper
-from modules.lib.train_classifier import TrainClassifier
+from modules.lib.train import TrainClassifier
 from modules.models import UserModel
 from modules.schemas import UserSchema, ImageSchema
 from modules.settings import PATH_DATASET, ENCODINGS_FILE

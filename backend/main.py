@@ -1,9 +1,6 @@
 import os
-
-import pyfiglet
-
 from modules.db import engine
-from modules.lib.train_classifier import TrainClassifier
+from modules.lib.train import TrainClassifier
 from modules.models import DBase
 from modules.settings import VIDEO_SOURCE
 from modules.lib.utils import AppUtils
