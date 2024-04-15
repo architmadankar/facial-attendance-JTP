@@ -1,14 +1,10 @@
-# Stage 1: Build the Angular application
-FROM node:18.20.1 as build
-WORKDIR /app
+FROM node:18.20.1 as builder
+RUN mkdir /project
+WORKDIR /project
 COPY package.json yarn.lock ./
+RUN yarn add -g @angular/cli
 RUN yarn install
 COPY . .
-RUN yarn run build
-
-# Stage 2: Serve the application with Nginx
-FROM nginx:1.19.2-alpine
-COPY --from=build /app/dist /usr/share/nginx/html
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+RUN yarn build
 EXPOSE 4200
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "4200"]
