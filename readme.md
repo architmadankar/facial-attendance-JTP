@@ -85,13 +85,8 @@ Facial Attendance can have many advantages such as:
     ```bash
      winget install -e --id Kitware.CMake
     ```
-+ Conda
- 
-    ```bash
-       winget install -e --id Anaconda.Miniconda3
-    ```
 
-+ Optional if Conda doesn't work Install [Visual Studio C++ Development Environments](https://visualstudio.microsoft.com/downloads/)
++ Optional if Conda doesn't work Install [Visual Studio C++ Build Tools ](https://visualstudio.microsoft.com/downloads/?q=build+tools)
 
 #### Installation
 

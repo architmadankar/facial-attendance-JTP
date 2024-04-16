@@ -59,7 +59,7 @@ export class VideoListComponent implements OnInit {
       res => {
         this.feeds.push(res);
         this.delResponseMsg = '';
-        this.addResponseMsg = `Video feed for Classroom '${res.id}' has been added successfully`;
+        this.addResponseMsg = `Video feed '${res.id}' has been added successfully`;
       }
     );
   }
