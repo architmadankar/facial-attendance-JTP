@@ -3,7 +3,7 @@ FROM python:3.11-slim-buster
 RUN mkdir /project-api
 WORKDIR /project-api
 
-RUN apt-get update && apt-get install -y \
+RUN apt update --fix-missing && apt install -y \
     cmake \
     build-essential \
     libopencv-dev

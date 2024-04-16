@@ -9,7 +9,7 @@ The application uses Flask for the Backend and Angular Js for Frontend
 
 ## Table of Contents
 
- - Features
+ - Features 
  - Technologies Used
  - Requirements
  - Installation
@@ -31,53 +31,86 @@ Facial Attendance can have many advantages such as:
 |--|--|
 |  nodejs|20  |
 |python| 3.11|
-
+|face_recognition| latest|
+|opencv| latest|
+|cmake| latest|
+|angular| 17|
+|yarn| latest|
 
 
 ### Requirements
 
-1. Docker and Docker compose ( for linux, MacOs ) or Docker Desktop ( for windows )
+1. Docker and Docker compose ( for linux )
 2. Python 3.11 
 3. NodeJs 18+ 
+4. Cmake
 
 ## Installation
 ### For Linux 
 1. Install python and node js 
 
-	`sudo apt install python3 python3-pip nodejs`
+	```bash
+    sudo apt install python3 python3-pip nodejs
+    ```
 
 2.	 Install docker 
 
     sudo apt install docker docker-compose
 3. Clone this repository
 
+      ```bash
       git clone https://github.com/architmadankar/facial-attendance-JTP.git
+      ```
 4. Change the directory
 
-    `    cd facial-attendance-JTP`
+    ```bash
+    cd facial-attendance-JTP
+    ```
 
-5.  Open the terminal in this folder and run this command:  `docker-compose up -d`
-6.  Open the service in your browser:  [http://localhost:4200/login](http://localhost:4200/login)
+5.  Open the terminal in this folder and run this command: 
+ ```bash
+ docker-compose up -d
+ ```
 
-### For Windows
-1. Install Python and Nodejs
 
-> Install from their official websites
-> [Python](https://www.python.org/downloads/) [NodeJs](https://nodejs.org/en/download)
+6.  Open the service in your browser:  [http://localhost:4200/](http://localhost:4200/)
 
-2.	 Install docker 
->[Docker](https://www.docker.com/products/docker-desktop/)
 
-3. Clone this repository
+### For Windows | Non-Containerized
+
+#### Prerequisite
+
++ [Cmake](https://github.com/Kitware/CMake/releases/download/v3.29.2/cmake-3.29.2-windows-x86_64.msi) 
++ [Visual Studio C++ Development Environments](https://visualstudio.microsoft.com/downloads/)
+
+#### Installation
+
+1. Install Python and Nodejs from their official websites
+> [Python](https://www.python.org/downloads/) 
+
+> [NodeJs](https://nodejs.org/en/download)
+
+
+2. Clone this repository
 >you can directly download from the github repository or use git cli 
 
       git clone https://github.com/architmadankar/facial-attendance-JTP.git
-4. Change the directory
+3. Change the directory
 
-    `    cd facial-attendance-JTP`
+    ```bash
+    cd facial-attendance-JTP
+    ```
 
-5.  Open the terminal in this folder and run this command:  `docker-compose up -d`
-6.  Open the service in your browser:  [http://localhost:4200/login](http://localhost:4200/login)
+5.  Open the terminal in this folder and run this command  
+```bash
+docker-compose up -d
+```
+
+6.  Open the service in your browser:  [http://localhost:4200/login](http://localhost:4200/)
+
+
+
+- Note: Since Webcam support is not avilable with docker deskop (windows), there's no way to run this application inside a docker container in windows
 
 
 ## Usage
@@ -91,21 +124,24 @@ Facial Attendance can have many advantages such as:
 - On the controls Tab select Start and it will start marking attendances
 - Navigate to Check Attendance Tab to check the Marked Attendance
 
+### Step-by-step Procedure
+
+
 ## Screenshots
 
-![Add User](https://github.com/architmadankar/facial-attendance-JTP/blob/90e7a2ce5c84b12eb849293942e85112ebb2e740/screenshots/addUser.png) "Optional title")
+![Add User](https://github.com/architmadankar/facial-attendance-JTP/blob/90e7a2ce5c84b12eb849293942e85112ebb2e740/screenshots/addUser.png) 
 
-![Login](https://github.com/architmadankar/facial-attendance-JTP/blob/90e7a2ce5c84b12eb849293942e85112ebb2e740/screenshots/login.png) "Optional title")
+![Login](https://github.com/architmadankar/facial-attendance-JTP/blob/90e7a2ce5c84b12eb849293942e85112ebb2e740/screenshots/login.png)
 
-![Register](https://github.com/architmadankar/facial-attendance-JTP/blob/90e7a2ce5c84b12eb849293942e85112ebb2e740/screenshots/register.png "Optional title")
+![Register](https://github.com/architmadankar/facial-attendance-JTP/blob/90e7a2ce5c84b12eb849293942e85112ebb2e740/screenshots/register.png)
 
 
 ## References 
-facial recognition pre-trained classifier from official opencv github repo
+* facial recognition pre-trained classifier from official opencv github repo
 
 > https://github.com/opencv/opencv/tree/master/data/haarcascades
 
-Image File Helper from isLinXu
+* Image File Helper from isLinXu
 
 > using https://github.com/isLinXu/CVProcessLib/blob/master/utils/ImgFileHelper.py
 
@@ -113,6 +149,8 @@ Image File Helper from isLinXu
 
 > in /modules/lib/image_helper.py for file uploads in Flask
 
-for camera-initialization, frame-capturing, and client sync using 
+* for camera-initialization, frame-capturing, and client sync using 
 
 > https://kizniche.github.io/Mycodo/
+
+

@@ -4,11 +4,11 @@ FROM node:18.20.1-alpine as stage-1
 RUN mkdir /project
 WORKDIR /project
 COPY package.json yarn.lock /project/
-RUN yarn add global @angular/cli
+RUN yarn global add @angular/cli
 COPY . /project
-RUN yarn run build
-# EXPOSE 4200
-# CMD ng serve --host 0.0.0.0 --port 4200
+RUN yarn 
+# EXPOSE 8080
+# CMD yarn start --port 8080
 
 #TODO : Nginx portforward
 FROM nginx:alpine

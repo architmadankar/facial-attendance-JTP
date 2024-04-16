@@ -1,4 +1,4 @@
-version: '4'
+version: '3.9'
 services:
   frontend:
     build: 
@@ -6,7 +6,6 @@ services:
     image: frontend-image
     ports:
       - "4200:4200"
-      - "8080:80"
     volumes:
       - ./frontend:/project
       - /project/node_modules
@@ -19,3 +18,7 @@ services:
       - 5000:5000
     volumes:
       - ./backend:/project-api
+    devices:
+      - /dev/video0:/dev/video0 #for Linux video capture
+      - /dev/video0:/dev/video1
+
