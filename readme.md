@@ -81,7 +81,17 @@ Facial Attendance can have many advantages such as:
 #### Prerequisite
 
 + [Cmake](https://github.com/Kitware/CMake/releases/download/v3.29.2/cmake-3.29.2-windows-x86_64.msi) 
-+ [Visual Studio C++ Development Environments](https://visualstudio.microsoft.com/downloads/)
+ 
+    ```bash
+     winget install -e --id Kitware.CMake
+    ```
++ Conda
+ 
+    ```bash
+       winget install -e --id Anaconda.Miniconda3
+    ```
+
++ Optional if Conda doesn't work Install [Visual Studio C++ Development Environments](https://visualstudio.microsoft.com/downloads/)
 
 #### Installation
 
