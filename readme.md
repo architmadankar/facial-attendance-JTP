@@ -110,7 +110,8 @@ docker-compose up -d
 
 
 
-- Note: Since Webcam support is not avilable with docker deskop (windows), there's no way to run this application inside a docker container in windows
+> Note: Since Webcam support is not avilable with docker deskop (windows), there's no way to run this application inside a docker container in windows
+> However you can use start.bat to one click activate the application (python and nodejs required) 
 
 
 ## Usage
