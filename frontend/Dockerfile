@@ -17,6 +17,6 @@ WORKDIR /usr/share/nginx/html
 
 RUN rm -rf ./*
 
-COPY --from=stage-1 /project/dist/frontend-v2/browser .
+COPY --from=stage-1 /project/dist/frontend/browser .
 
 ENTRYPOINT [ "nginx", "-g", "daemon off;"]
